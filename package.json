@@ -1,6 +1,6 @@
 {
   "name": "moluren",
-  "version": "0.1.0",
+  "version": "0.1.0-1",
   "description": "lib for interacting with www.moluren.net",
   "main": "moluren.js",
   "dependencies": {
