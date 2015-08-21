@@ -14,7 +14,7 @@ var url = {
 }
 
 
-var moluren = function() {
+var moluren = function(params) {
     var request = require('request');
     this.connected = false;
     this.request = request.defaults({
@@ -23,7 +23,8 @@ var moluren = function() {
             'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) ' +
             'AppleWebKit/537.2 (KHTML, like Gecko) ' +
             'Chrome/22.0.1216.0 Safari/537.2'
-        }
+        },
+        proxy: params.proxy
     })
 
 }
@@ -58,7 +59,7 @@ moluren.prototype.connect = function() {
                 url: url.connect,
                 json: true,
                 form: {_token_id_: token}
-            }, callback) 
+            }, callback)
         },
         function(response, body, callback){
             if (body.connect){
@@ -100,9 +101,10 @@ moluren.prototype.poll = function() {
             console.log(that._token, 'remote disconnected');
             that.connected = false;
             that.emit('disconnected');
+            return;
         }
         that.poll();
-    }); 
+    });
 }
 
 moluren.prototype.say = function(messages){
