@@ -87,7 +87,9 @@ moluren.prototype.poll = function() {
         json: true
     }, function(error, response, body){
         if (!body || !body.hb) {
-            that.poll();
+            if (that.connected) {
+                that.poll();
+            }
             return;
         }
         if (body.hb.conn){
